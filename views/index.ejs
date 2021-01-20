@@ -76,7 +76,7 @@
           <% for (var i=0; i < data['rss']['channel']['item'].length; i++) { %>
             <% if (typeof data['rss']['channel']['item'][i]['category'].length !== "undefined") { %>
               <% for (let j=0; j< data['rss']['channel']['item'][i]['category'].length; j++) { %>
-                <% if (type) { %>
+                <% if (typeof type !== "undefined") { %>
                   <% if (count < limit) { %>
                     <% if (data['rss']['channel']['item'][i]['category'][j]['_text'] == type) { %>
                       <% count++ %>
@@ -128,6 +128,24 @@
                               <span class="html-tag">&lt;/link&gt;</span>
                             </div>
                             <div class="line">
+                              <span class="html-tag">&lt;media:content
+                                <span class="html-attribute"> 
+                                  <span class="html-attribute-name">height</span>="
+                                  <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['height'] %></span>"
+                                </span>
+                                <span class="html-attribute"> 
+                                  <span class="html-attribute-name">url</span>="
+                                  <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['url'] %></span>"
+                                </span>
+                                <span class="html-attribute"> 
+                                  <span class="html-attribute-name">width</span>="
+                                  <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['width'] %></span>"
+                                </span>
+                                &gt;
+                              </span>
+                              <span class="html-tag">&lt;/media:content&gt;</span>
+                            </div>
+                            <div class="line">
                               <span class="html-tag">&lt;author&gt;</span>
                               <span><%= data['rss']['channel']['item'][i]['atom:author']['atom:name']['_text'] %></span>
                               <span class="html-tag">&lt;/author&gt;</span>
@@ -140,130 +158,173 @@
                       </div>
                     <% } %>
                   <% } %>  
-                <% } else { %>
-                    <div class="folder" id="folder<%= 4+i %>">
-                      <div class="line">
-                        <span class="folder-button fold"></span>
-                        <span class="html-tag">&lt;item&gt;</span>
-                      </div>
-                      <div class="opened">
-                        <div class="folder" id="folder8">
-                          <div class="line">
-                            <span class="html-tag">&lt;guid<span class="html-attribute"> 
-                            <span class="html-attribute-name">isPermaLink</span>="<span class="html-attribute-value">false</span>"</span>&gt;</span>
-                            <span><%= data['rss']['channel']['item'][i]['guid']['_text'] %></span>
-                            <span class="html-tag">&lt;/guid&gt;</span>
-                          </div>
-                          <div class="line">
-                            <span class="html-tag">&lt;pubDate&gt;</span>
-                            <span><%= data['rss']['channel']['item'][i]['pubDate']['_text'] %></span>
-                            <span class="html-tag">&lt;/pubDate&gt;</span>
-                          </div>
-                          <div class="line">
-                            <span class="folder-button fold"></span>
-                            <span class="html-tag">&lt;title&gt;</span>
-                          </div>
-                          <div class="opened">
-                            <div class="line">
-                              <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['title']['_text'] %> ]]&gt;</span>
-                            </div>
-                          </div>
-                          <span class="folded hidden">...</span>
-                          <div class="line">
-                            <span class="html-tag">&lt;/title&gt;</span>
-                          </div>
-                        </div>
-                        <div class="line">
-                          <span class="html-tag">&lt;description&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['description']['_cdata'] %></span>
-                          <span class="html-tag">&lt;/description&gt;</span>
-                        </div>
-                        <div class="line">
-                          <span class="html-tag">&lt;content:encoded&gt;</span>
-                          <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %> ]]&gt;</span>
-                          <span class="html-tag">&lt;/content:encoded&gt;</span>
-                        </div>
-                        <div class="line">
-                          <span class="html-tag">&lt;link&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['link']['_text'] %></span>
-                          <span class="html-tag">&lt;/link&gt;</span>
-                        </div>
-                        <div class="line">
-                          <span class="html-tag">&lt;author&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['atom:author']['atom:name']['_text'] %></span>
-                          <span class="html-tag">&lt;/author&gt;</span>
-                        </div>
-                      </div>
-                      <span class="folded hidden">...</span>
-                      <div class="line">
-                        <span class="html-tag">&lt;/item&gt;</span>
-                      </div> 
-                    </div>
                 <% } %>
               <% } %>
             <% } %>
-            <% if (count < limit) { %>
-              <% if (typeof data['rss']['channel']['item'][i]['category'].length === "undefined") { %>
-                <% if (data['rss']['channel']['item'][i]['category']['_text'] === type) { %>
-                  <% count++ %>
-                  <div class="folder" id="folder<%= 4+i %>">
+            <% if (typeof type === "undefined") { %>
+              <div class="folder" id="folder<%= 4+i %>">
+                <div class="line">
+                  <span class="folder-button fold"></span>
+                  <span class="html-tag">&lt;item&gt;</span>
+                </div>
+                <div class="opened">
+                  <div class="folder" id="folder8">
+                    <div class="line">
+                      <span class="html-tag">&lt;guid
+                        <span class="html-attribute"> 
+                          <span class="html-attribute-name">isPermaLink</span>="
+                          <span class="html-attribute-value">false</span>"
+                        </span>&gt;
+                      </span>
+                      <span><%= data['rss']['channel']['item'][i]['guid']['_text'] %></span>
+                      <span class="html-tag">&lt;/guid&gt;</span>
+                    </div>
+                    <div class="line">
+                      <span class="html-tag">&lt;pubDate&gt;</span>
+                      <span><%= data['rss']['channel']['item'][i]['pubDate']['_text'] %></span>
+                      <span class="html-tag">&lt;/pubDate&gt;</span>
+                    </div>
+                    <div class="line">
+                      <span class="folder-button fold"></span>
+                      <span class="html-tag">&lt;title&gt;</span>
+                    </div>
+                    <div class="opened">
                       <div class="line">
-                        <span class="folder-button fold"></span>
-                        <span class="html-tag">&lt;item&gt;</span>
+                        <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['title']['_text'] %> ]]&gt;</span>
                       </div>
-                      <div class="opened">
-                        <div class="folder" id="folder8">
-                          <div class="line">
-                            <span class="html-tag">&lt;guid<span class="html-attribute"> 
-                            <span class="html-attribute-name">isPermaLink</span>="<span class="html-attribute-value">false</span>"</span>&gt;</span>
-                            <span><%= data['rss']['channel']['item'][i]['guid']['_text'] %></span>
-                            <span class="html-tag">&lt;/guid&gt;</span>
-                          </div>
-                          <div class="line">
-                            <span class="html-tag">&lt;pubDate&gt;</span>
-                            <span><%= data['rss']['channel']['item'][i]['pubDate']['_text'] %></span>
-                            <span class="html-tag">&lt;/pubDate&gt;</span>
-                          </div>
-                          <div class="line">
-                            <span class="folder-button fold"></span>
-                            <span class="html-tag">&lt;title&gt;</span>
-                          </div>
-                          <div class="opened">
+                    </div>
+                    <span class="folded hidden">...</span>
+                    <div class="line">
+                      <span class="html-tag">&lt;/title&gt;</span>
+                    </div>
+                  </div>
+                  <div class="line">
+                    <span class="html-tag">&lt;description&gt;</span>
+                    <span><%= data['rss']['channel']['item'][i]['description']['_cdata'] %></span>
+                    <span class="html-tag">&lt;/description&gt;</span>
+                  </div>
+                  <div class="line">
+                    <span class="html-tag">&lt;content:encoded&gt;</span>
+                    <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %> ]]&gt;</span>
+                    <span class="html-tag">&lt;/content:encoded&gt;</span>
+                  </div>
+                  <div class="line">
+                    <span class="html-tag">&lt;link&gt;</span>
+                    <span><%= data['rss']['channel']['item'][i]['link']['_text'] %></span>
+                    <span class="html-tag">&lt;/link&gt;</span>
+                  </div>
+                  <div class="line">
+                    <span class="html-tag">&lt;media:content
+                      <span class="html-attribute"> 
+                        <span class="html-attribute-name">height</span>="
+                        <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['height'] %></span>"
+                      </span>
+                      <span class="html-attribute"> 
+                        <span class="html-attribute-name">url</span>="
+                        <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['url'] %></span>"
+                      </span>
+                      <span class="html-attribute"> 
+                        <span class="html-attribute-name">width</span>="
+                        <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['width'] %></span>"
+                      </span>
+                      &gt;
+                    </span>
+                    <span class="html-tag">&lt;/media:content&gt;</span>
+                  </div>
+                  <div class="line">
+                    <span class="html-tag">&lt;author&gt;</span>
+                    <span><%= data['rss']['channel']['item'][i]['atom:author']['atom:name']['_text'] %></span>
+                    <span class="html-tag">&lt;/author&gt;</span>
+                  </div>
+                </div>
+                <span class="folded hidden">...</span>
+                <div class="line">
+                  <span class="html-tag">&lt;/item&gt;</span>
+                </div> 
+              </div>
+            <% } %>
+            <% if (typeof type !== "undefined") { %>
+              <% if (count < limit) { %>
+                <% if (typeof data['rss']['channel']['item'][i]['category'].length === "undefined") { %>
+                  <% if (data['rss']['channel']['item'][i]['category']['_text'] === type) { %>
+                    <% count++ %>
+                    <div class="folder" id="folder<%= 4+i %>">
+                        <div class="line">
+                          <span class="folder-button fold"></span>
+                          <span class="html-tag">&lt;item&gt;</span>
+                        </div>
+                        <div class="opened">
+                          <div class="folder" id="folder8">
                             <div class="line">
-                              <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['title']['_text'] %> ]]&gt;</span>
+                              <span class="html-tag">&lt;guid<span class="html-attribute"> 
+                              <span class="html-attribute-name">isPermaLink</span>="<span class="html-attribute-value">false</span>"</span>&gt;</span>
+                              <span><%= data['rss']['channel']['item'][i]['guid']['_text'] %></span>
+                              <span class="html-tag">&lt;/guid&gt;</span>
+                            </div>
+                            <div class="line">
+                              <span class="html-tag">&lt;pubDate&gt;</span>
+                              <span><%= data['rss']['channel']['item'][i]['pubDate']['_text'] %></span>
+                              <span class="html-tag">&lt;/pubDate&gt;</span>
+                            </div>
+                            <div class="line">
+                              <span class="folder-button fold"></span>
+                              <span class="html-tag">&lt;title&gt;</span>
+                            </div>
+                            <div class="opened">
+                              <div class="line">
+                                <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['title']['_text'] %> ]]&gt;</span>
+                              </div>
+                            </div>
+                            <span class="folded hidden">...</span>
+                            <div class="line">
+                              <span class="html-tag">&lt;/title&gt;</span>
                             </div>
                           </div>
-                          <span class="folded hidden">...</span>
                           <div class="line">
-                            <span class="html-tag">&lt;/title&gt;</span>
+                            <span class="html-tag">&lt;description&gt;</span>
+                            <span><%= data['rss']['channel']['item'][i]['description']['_cdata'] %></span>
+                            <span class="html-tag">&lt;/description&gt;</span>
+                          </div>
+                          <div class="line">
+                            <span class="html-tag">&lt;content:encoded&gt;</span>
+                            <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %> ]]&gt;</span>
+                            <span class="html-tag">&lt;/content:encoded&gt;</span>
+                          </div>
+                          <div class="line">
+                            <span class="html-tag">&lt;link&gt;</span>
+                            <span><%= data['rss']['channel']['item'][i]['link']['_text'] %></span>
+                            <span class="html-tag">&lt;/link&gt;</span>
+                          </div>
+                          <div class="line">
+                            <span class="html-tag">&lt;media:content
+                              <span class="html-attribute"> 
+                                <span class="html-attribute-name">height</span>="
+                                <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['height'] %></span>"
+                              </span>
+                              <span class="html-attribute"> 
+                                <span class="html-attribute-name">url</span>="
+                                <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['url'] %></span>"
+                              </span>
+                              <span class="html-attribute"> 
+                                <span class="html-attribute-name">width</span>="
+                                <span class="html-attribute-value"><%= data['rss']['channel']['item'][i]['media:content']['_attributes']['width'] %></span>"
+                              </span>
+                              &gt;
+                            </span>
+                            <span class="html-tag">&lt;/media:content&gt;</span>
+                          </div>
+                          <div class="line">
+                            <span class="html-tag">&lt;author&gt;</span>
+                            <span><%= data['rss']['channel']['item'][i]['atom:author']['atom:name']['_text'] %></span>
+                            <span class="html-tag">&lt;/author&gt;</span>
                           </div>
                         </div>
+                        <span class="folded hidden">...</span>
                         <div class="line">
-                          <span class="html-tag">&lt;description&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['description']['_cdata'] %></span>
-                          <span class="html-tag">&lt;/description&gt;</span>
-                        </div>
-                        <div class="line">
-                          <span class="html-tag">&lt;content:encoded&gt;</span>
-                          <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %> ]]&gt;</span>
-                          <span class="html-tag">&lt;/content:encoded&gt;</span>
-                        </div>
-                        <div class="line">
-                          <span class="html-tag">&lt;link&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['link']['_text'] %></span>
-                          <span class="html-tag">&lt;/link&gt;</span>
-                        </div>
-                        <div class="line">
-                          <span class="html-tag">&lt;author&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['atom:author']['atom:name']['_text'] %></span>
-                          <span class="html-tag">&lt;/author&gt;</span>
-                        </div>
-                      </div>
-                      <span class="folded hidden">...</span>
-                      <div class="line">
-                        <span class="html-tag">&lt;/item&gt;</span>
-                      </div> 
-                  </div>
+                          <span class="html-tag">&lt;/item&gt;</span>
+                        </div> 
+                    </div>
+                  <% } %>
                 <% } %>
               <% } %>
             <% } %>  
