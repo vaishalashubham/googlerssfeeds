@@ -37,7 +37,7 @@
             <div class="folder" id="folder2">
                 <div class="line">
                     <span class="html-tag">&lt;lastBuildDate&gt;</span>
-                    <span><%= lastBuildDate['headers']['date'] %></span>
+                    <span><%= data['rss']['channel']['lastBuildDate']['_text'] %></span>
                     <span class="html-tag">&lt;/lastBuildDate&gt;</span>
                 </div>
                 <div class="line">
@@ -95,7 +95,7 @@
                               </div>
                               <div class="line">
                                 <span class="html-tag">&lt;pubDate&gt;</span>
-                                <span><%= new Date(data['rss']['channel']['item'][i]['pubDate']['_text']) %></span>
+                                <span><%= data['rss']['channel']['item'][i]['pubDate']['_text'] %></span>
                                 <span class="html-tag">&lt;/pubDate&gt;</span>
                               </div>
                               <div class="line">
@@ -119,7 +119,7 @@
                             </div>
                             <div class="line">
                               <span class="html-tag">&lt;content:encoded&gt;</span>
-                              <span><%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %></span>
+                              <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %> ]]&gt;</span>
                               <span class="html-tag">&lt;/content:encoded&gt;</span>
                             </div>
                             <div class="line">
@@ -156,7 +156,7 @@
                           </div>
                           <div class="line">
                             <span class="html-tag">&lt;pubDate&gt;</span>
-                            <span><%= new Date(data['rss']['channel']['item'][i]['pubDate']['_text']) %></span>
+                            <span><%= data['rss']['channel']['item'][i]['pubDate']['_text'] %></span>
                             <span class="html-tag">&lt;/pubDate&gt;</span>
                           </div>
                           <div class="line">
@@ -180,7 +180,7 @@
                         </div>
                         <div class="line">
                           <span class="html-tag">&lt;content:encoded&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %></span>
+                          <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %> ]]&gt;</span>
                           <span class="html-tag">&lt;/content:encoded&gt;</span>
                         </div>
                         <div class="line">
@@ -221,7 +221,7 @@
                           </div>
                           <div class="line">
                             <span class="html-tag">&lt;pubDate&gt;</span>
-                            <span><%= new Date(data['rss']['channel']['item'][i]['pubDate']['_text']) %></span>
+                            <span><%= data['rss']['channel']['item'][i]['pubDate']['_text'] %></span>
                             <span class="html-tag">&lt;/pubDate&gt;</span>
                           </div>
                           <div class="line">
@@ -245,7 +245,7 @@
                         </div>
                         <div class="line">
                           <span class="html-tag">&lt;content:encoded&gt;</span>
-                          <span><%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %></span>
+                          <span>&lt;![CDATA[ <%= data['rss']['channel']['item'][i]['content:encoded']['_cdata'] %> ]]&gt;</span>
                           <span class="html-tag">&lt;/content:encoded&gt;</span>
                         </div>
                         <div class="line">
