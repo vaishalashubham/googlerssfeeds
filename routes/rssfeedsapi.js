@@ -6,7 +6,9 @@ var convert = require('xml-js');
 router.get('/googlerssfeeds', function(req, res, next){
    var stype = req.param("section");
    var slimit = req.param("limit");
-   console.log("section : "+ stype + " limit : "+ slimit);
+   if (!slimit) {
+     slimit = 15;
+   }
    axios.get("https://www.thequint.com/stories.rss")
    .then((dt) => {
       const xml = dt.data;
