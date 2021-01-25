@@ -37,14 +37,31 @@
             <div class="folder" id="folder2">
                 <div class="line">
                     <span class="html-tag">&lt;lastBuildDate&gt;</span>
-                    <span><%= data['rss']['channel']['lastBuildDate']['_text'] %></span>
+                    <% if (typeof type === "undefined") { %>
+                       <span><%= data['rss']['channel']['lastBuildDate']['_text'] %></span>
+                    <% } else { %>
+                      <% if (lbd !== "") { %>
+                        <span><%= lbd %></span>
+                      <% } else { %>
+                        <% var currDate = new Date().toString(); %>
+                        <span><%= currDate.slice(0, 3)+ ", " + currDate.slice(8, 10) + " " + currDate.slice(4, 7) + currDate.slice(10, 24)+ " +0530" %></span>
+                      <% } %>
+                    <% } %>
                     <span class="html-tag">&lt;/lastBuildDate&gt;</span>
                 </div>
                 <div class="line">
                   <span class="folder-button fold"></span><span class="html-tag">&lt;title&gt;</span></div>
                   <div class="opened">
                     <div class="line">
-                      <span>&lt;![CDATA[ The Quint ]]&gt;</span>
+                      <% if (typeof type !== "undefined") { %>
+                        <% if (metadata['title'] !== "") { %>
+                          <span>&lt;![CDATA[ <%= metadata['title'] %> ]]&gt;</span>
+                        <% } else { %>
+                          <span>&lt;![CDATA[ The Quint ]]&gt;</span>
+                        <% } %>
+                      <% } else { %>
+                        <span>&lt;![CDATA[ The Quint ]]&gt;</span>
+                      <% } %>
                     </div>
                   </div>
                   <span class="folded hidden">...</span>
@@ -58,7 +75,15 @@
                 </div>
                 <div class="opened">
                   <div class="line">
-                    <span>&lt;![CDATA[ Latest News, Breaking News, Online India News, Cricket News, Viral Videos - quint ]]&gt;</span>
+                    <% if (typeof type !== "undefined") { %>
+                      <% if (metadata['title'] !== "") { %>
+                        <span>&lt;![CDATA[ <%= metadata['desc'] %> ]]&gt;</span>
+                      <% } else { %>
+                        <span>&lt;![CDATA[ Latest News, Breaking News, Online India News, Cricket News, Viral Videos - quint ]]&gt;</span>
+                      <% } %>
+                    <% } else { %>
+                      <span>&lt;![CDATA[ Latest News, Breaking News, Online India News, Cricket News, Viral Videos - quint ]]&gt;</span>
+                    <% } %>
                   </div>
                 </div>
                 <span class="folded hidden">...</span>

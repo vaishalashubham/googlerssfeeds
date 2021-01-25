@@ -5,12 +5,11 @@ div.header {
 }
 
 div.hidden {
-    display:none;
+    display: none;
 }
 
-
 span.hidden {
-    display:none;
+    display: none;
 }
 
 .pretty-print {
