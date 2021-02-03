@@ -14,9 +14,14 @@
     "dom-parser": "^0.1.6",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "feed": "^4.2.2",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.6",
+    "rss": "^1.2.2",
+    "rss-generator": "0.0.3",
     "xml-js": "^1.6.11",
     "xmlbuilder": "^15.1.1"
   }
